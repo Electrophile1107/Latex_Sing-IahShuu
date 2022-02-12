@@ -1,0 +1,72 @@
+\documentclass[12pt,letterpaper]{book}
+
+\usepackage[hmargin=1in,vmargin=1in]{geometry}
+\usepackage{fancybox}					% Draw a box @cover
+\usepackage{pict2e}						% Draw a box @cover
+\usepackage{ulem}						% Draw a delete line @cover
+\usepackage{pifont}						% Use special symbols @cover
+\usepackage[inline]{enumitem}			% Extension for lists @toc & @CHAPTERS
+\usepackage{multicol}					% Use multi columns @toc
+\usepackage[compact,explicit]{titlesec}	% Customize title of chapters @CHAPTERS
+\usepackage{ifthen}						% Make commands @CHAPTERS
+\usepackage{lettrine}					% Produces a dropped capital @CHAPTERS
+
+\newcommand\y{\"u}
+\newcommand\e{\"o}
+\newcommand\oo{\^o}
+\newcommand\Y{\"U}
+\newcommand\E{\"O}
+\newcommand\OO{\^O}
+% \ae already defined
+\newcommand\head[1]{\MakeUppercase{\large\bfseries #1}}
+
+\pagestyle{empty}
+
+
+% Formatting Chapters & Sections
+\newcounter{sChapter}[part]
+\newcommand{\sChapter}[6]{
+	\refstepcounter{sChapter}
+	\clearpage
+	\vspace{4pt}
+	\begin{center}
+		\ifthenelse{\equal{#1}{}}{}{\LARGE				\MakeUppercase{#1} \protect\\[5pt]}	% S-du
+		\ifthenelse{\equal{#2}{}}{}{\Large				\MakeUppercase{#2} \protect\\[6pt]} % S-du sb.-keh
+		\ifthenelse{\equal{#3}{}}{}{\normalsize			\MakeUppercase{#3} \protect\\[3pt]}	% Sia-peh
+		\ifthenelse{\equal{#4}{}}{}{\huge\bfseries		\MakeUppercase{#4} \protect\\[4pt]} % Main title
+		\ifthenelse{\equal{#5}{}}{}{\large\normalfont	\MakeUppercase{#5} \protect\\[4pt]} % Subtitle
+		\ifthenelse{\equal{#6}{}}{}{\normalsize			\MakeUppercase{#6} \protect\\[4pt]} % Di-n-fu
+		\rule{2in}{0.8pt}
+	\end{center}
+}
+\makeatletter
+\@addtoreset{section}{sChapter}
+\makeatother
+\renewcommand{\thesection}{\arabic{section}.}
+\titleformat							% Formatting the header
+	{\section}							% command
+	[block]								% shape
+	{\centering \large}					% format - Change here as needed
+	{}									% label
+	{0pt}								% sep
+	{}									% before
+	[#1~\thesection]					% after
+
+% Formatting abstract of each section
+\newenvironment{sAbstract}{%
+	\itshape
+	\begin{enumerate*}[labelwidth=2ex, font={\normalfont}, itemjoin={{~~~}}]
+	}{%
+	\end{enumerate*}
+	\par\vspace{2ex}
+}
+
+% Formatting Tsông
+\newcounter{ssection}[section]
+\renewcommand\thessection{\arabic{ssection}~}
+\catcode`\+=13
+\newcommand+{\stepcounter{ssection}\thessection}
+\newcommand\header{\stepcounter{ssection}}
+
+
+\listfiles
